@@ -1,0 +1,10 @@
+terraform {
+   backend "remote" {
+   hostname     = "${tfe_hostname}"
+   organization = "${tfe_organization}"
+   token        = "${ghe_token}"
+   workspaces {
+     name = "${tfe_workspace}"
+   }
+ }
+}
