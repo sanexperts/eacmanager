@@ -12,6 +12,18 @@ resource "tfe_workspace" "ghemanager" {
   ]
 }
 
+resource "local_file" "backend" {
+  content  = templatefile("../tmpl/backend.tmpl", { tfe_hostname = var.tfe_hostname, tfe_organization = var.tfe_org_name, tfe_token = var.tfe_token, tfe_workspace = tfe_workspace.ghemanager.name })
+  filename = "../ghe/backend.tf"
+}
+
+# resource "null_resource" "pushghestate" {
+#   provisioner "local-exec" {
+#     command     = "terraform state push"
+#     working_dir = "../ghe"
+#   }
+# }
+
 resource "tfe_variable" "ghe_token" {
   key          = "ghe_token"
   value        = var.ghe_token
