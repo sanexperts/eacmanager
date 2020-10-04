@@ -3,3 +3,8 @@ provider "tfe" {
   token    = var.tfe_token
   version  = "~> 0.16.2"
 }
+
+provider "github" {
+  token        = var.ghe_token
+  organization = var.tfe_org_name
+}
