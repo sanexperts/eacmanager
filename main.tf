@@ -14,14 +14,14 @@ resource "local_file" "tfetfvars" {
 resource "null_resource" "createrepos" {
   provisioner "local-exec" {
     when        = create
-    command     = "terraform init &  terraform apply -auto-approve "
+    command     = "terraform init &&  terraform apply -auto-approve "
     working_dir = "ghe/"
   }
-  # provisioner "local-exec" {
-  #   when        = destroy
-  #   command     = "rm -rf .terraform & rm -f terraform.tfstate & cp terraform.tfstate.backup terraform.tfstate & terraform init & terraform destroy -auto-approve "
-  #   working_dir = "ghe/"
-  # }
+  provisioner "local-exec" {
+    when        = destroy
+    command     = "rm -rf .terraform && rm -f terraform.tfstate && cp terraform.tfstate.backup terraform.tfstate && terraform init & terraform destroy -auto-approve "
+    working_dir = "ghe/"
+  }
   depends_on = [
     local_file.ghetfvars
   ]
@@ -32,14 +32,14 @@ resource "null_resource" "createrepos" {
 resource "null_resource" "createworkspaces" {
   provisioner "local-exec" {
     when        = create
-    command     = "terraform init &  terraform apply -auto-approve "
+    command     = "terraform init &&  terraform apply -auto-approve "
     working_dir = "tfe/"
   }
-  # provisioner "local-exec" {
-  #   when        = destroy
-  #   command     = "rm -rf .terraform & rm -f terraform.tfstate & cp terraform.tfstate.backup terraform.tfstate & terraform init & terraform destroy -auto-approve "
-  #   working_dir = "tfe/"
-  # }
+  provisioner "local-exec" {
+    when        = destroy
+    command     = "rm -rf .terraform && rm -f terraform.tfstate && cp terraform.tfstate.backup terraform.tfstate && terraform init && terraform destroy -auto-approve "
+    working_dir = "tfe/"
+  }
   depends_on = [
     null_resource.createrepos, local_file.tfetfvars
   ]
@@ -59,7 +59,7 @@ resource "local_file" "ghebackend" {
 resource "null_resource" "pushghestate" {
   provisioner "local-exec" {
     when        = create
-    command     = "terraform init & terraform state push terraform.tfstate.backup"
+    command     = "terraform init && terraform state push terraform.tfstate.backup"
     working_dir = "ghe"
   }
   depends_on = [
