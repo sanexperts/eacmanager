@@ -80,7 +80,7 @@ resource "local_file" "tfebackend" {
 resource "null_resource" "pushtfestate" {
   provisioner "local-exec" {
     when        = create
-    command     = "terraform init & terraform state push terraform.tfstate.backup"
+    command     = "terraform init && terraform state push terraform.tfstate.backup"
     working_dir = "tfe"
   }
   depends_on = [
