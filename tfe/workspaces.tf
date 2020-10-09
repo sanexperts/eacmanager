@@ -19,6 +19,7 @@ resource "tfe_variable" "ghe_token" {
   category     = "terraform"
   workspace_id = tfe_workspace.ghemanager.id
   description  = "Personal token to admin Github"
+  sensitive    = "true"
   depends_on = [
     tfe_workspace.ghemanager
   ]
@@ -67,6 +68,7 @@ resource "tfe_variable" "tfe_token" {
   category     = "terraform"
   workspace_id = tfe_workspace.tfemanager.id
   description  = "Terraform enterprise admin token"
+  sensitive    = "true"
   depends_on = [
     tfe_workspace.tfemanager
   ]
@@ -100,6 +102,7 @@ resource "tfe_variable" "ghe_token_tfe" {
   category     = "terraform"
   workspace_id = tfe_workspace.tfemanager.id
   description  = "Terraform enterprise admin email address"
+  sensitive    = "true"
   depends_on = [
     tfe_workspace.tfemanager
   ]
