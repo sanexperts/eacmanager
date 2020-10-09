@@ -19,7 +19,11 @@ resource "null_resource" "createrepos" {
   }
   provisioner "local-exec" {
     when        = destroy
+<<<<<<< HEAD
     command     = "rm -rf .terraform && rm -f terraform.tfstate && cp terraform.tfstate.backup terraform.tfstate && terraform init && terraform destroy -auto-approve "
+=======
+    command     = "rm -rf .terraform && rm -f terraform.tfstate && cp terraform.tfstate.backup terraform.tfstate && terraform init & terraform destroy -auto-approve "
+>>>>>>> 557f98427ffaf19ca5e368acc92245a5f94bd8ee
     working_dir = "ghe/"
   }
   depends_on = [
@@ -32,7 +36,11 @@ resource "null_resource" "createrepos" {
 resource "null_resource" "createworkspaces" {
   provisioner "local-exec" {
     when        = create
+<<<<<<< HEAD
     command     = "terraform init &&  terraform apply -auto-approve"
+=======
+    command     = "terraform init &&  terraform apply -auto-approve "
+>>>>>>> 557f98427ffaf19ca5e368acc92245a5f94bd8ee
     working_dir = "tfe/"
   }
   provisioner "local-exec" {
