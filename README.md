@@ -18,7 +18,7 @@
 
 ## Description
 
-[**EACMANAGER**](https://github.com/sanexperts/eacmanager) intends to be the first and last time you use a terminal based tf script in your IAC project if that's what you are trying to. It setups the working Github-Terraform  environment that you can use to start deploying your infrastructure wherever you need to
+[**EACMANAGER**](https://github.com/sanexperts/eacmanager) intends to be the first and last time you use a terminal based _tf_ script in your IAC project if that's what you are trying to. It setups the working Github-Terraform  environment that you can use to start deploying your infrastructure wherever you need to
 
 This is an opensoruce effort any help it's very welcome just check <a href=./README.md/#contributing>Contributing</a> and start
 
