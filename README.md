@@ -33,7 +33,7 @@ This is an opensoruce effort any help it's very welcome just check <a href=./REA
 ## Getting started
 
 1. Clone the repository
-2. Rename the file `terraform.tfvars.template` to `terraform.tfvars`
+2. Copy the file `terraform.tfvars.template` to `terraform.tfvars`
 3. Edit the `terraform.tfvars` file with the variables.
 4. Run the command `terraform plan`
 5. Run the command `terraform apply`
