@@ -3,3 +3,5 @@ terraform.tfstate
 *.backup
 backend.tf
 terraform.tfvars
+**/*/README.md
+*.lock.info
