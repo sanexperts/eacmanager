@@ -9,6 +9,19 @@ resource "local_file" "tfetfvars" {
   filename = "tfe/terraform.tfvars"
 }
 
+#Create Readme files for repos
+resource "local_file" "readmeTfe" {
+  content         = templatefile("tmpl/readme.tmpl", { wh = "tfe", tfe_hostname = var.tfe_hostname, tfe_org_name = var.org_name, tfe_org_email = var.tfe_org_email, ghe_api_url = var.ghe_api_url, ghe_http_url = var.ghe_http_url })
+  filename        = "${path.module}/tfe/README.md"
+  file_permission = "0666"
+}
+
+resource "local_file" "readmeGhe" {
+  content         = templatefile("tmpl/readme.tmpl", { wh = "ghe", tfe_hostname = var.tfe_hostname, tfe_org_name = var.org_name, tfe_org_email = var.tfe_org_email, ghe_api_url = var.ghe_api_url, ghe_http_url = var.ghe_http_url })
+  filename        = "${path.module}/ghe/README.md"
+  file_permission = "0666"
+}
+
 #Create ghe repos for ghe manager & tfe Manager
 
 resource "null_resource" "createrepos" {
@@ -19,7 +32,7 @@ resource "null_resource" "createrepos" {
   }
   provisioner "local-exec" {
     when        = destroy
-    command     = "rm -rf .terraform && rm -f terraform.tfstate && cp terraform.tfstate.backup terraform.tfstate && terraform init && terraform destroy -auto-approve "
+    command     = "rm -rf .terraform && rm -f terraform.tfstate && cp terraform.tfstate.backup terraform.tfstate && terraform init && terraform destroy -auto-approve"
     working_dir = "ghe/"
   }
   depends_on = [
@@ -37,7 +50,7 @@ resource "null_resource" "createworkspaces" {
   }
   provisioner "local-exec" {
     when        = destroy
-    command     = "rm -rf .terraform && rm -f terraform.tfstate && cp terraform.tfstate.backup terraform.tfstate && terraform init && terraform destroy -auto-approve "
+    command     = "rm -rf .terraform && rm -f terraform.tfstate && cp terraform.tfstate.backup terraform.tfstate && terraform init && terraform destroy -auto-approve"
     working_dir = "tfe/"
   }
   depends_on = [
